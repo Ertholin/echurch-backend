@@ -2,8 +2,13 @@ package com.church.echurch_backend.web;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.church.echurch_backend.dtos.MembreDTO;
 import com.church.echurch_backend.entities.Membre;
 import com.church.echurch_backend.services.MembreService;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -15,13 +20,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-public class MembreController {
+@AllArgsConstructor
+@Slf4j
+public class MembreRestController {
     
     @Autowired
     private MembreService membreService;
 
     @GetMapping("/membres")
-    public List<Membre> getMembres() {
+    public List<MembreDTO> getMembres() {
         return membreService.listerMembres();
     }
     

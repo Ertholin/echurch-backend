@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.church.echurch_backend.enums.GroupePosition;
 import com.church.echurch_backend.enums.TypeIntegration;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,6 +46,7 @@ public class Membre {
 
     
     @OneToMany(mappedBy = "membre")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Adresse> adresses;
     
 }
