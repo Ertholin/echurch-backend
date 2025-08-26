@@ -46,12 +46,12 @@ public class MembreServiceImpl implements MembreService{
         return membreEnregistre;
     }
 
-    // @Override
-    // public Membre voirFicheMembre(Long idMembre) throws MembreNotFoundException {
-    //     Membre membre = membreRepository.findById(idMembre)
-    //         .orElseThrow(() -> new MembreNotFoundException("Membre non trouvé"));
-    //     return membre;
-    // }
+    @Override
+    public MembreDTO voirFicheMembre(Long idMembre) throws MembreNotFoundException {
+        Membre membre = membreRepository.findById(idMembre)
+            .orElseThrow(() -> new MembreNotFoundException("404: Membre non trouvé"));
+        return dtoMapper.fromMembre(membre);
+    }
 
     // @Override
     // public void supprimerMembre(Long idMembre) {
@@ -72,12 +72,6 @@ public class MembreServiceImpl implements MembreService{
     public void supprimerMembre(Long idMembre) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'supprimerMembre'");
-    }
-
-    @Override
-    public Membre voirFicheMembre(Long idMembre) throws MembreNotFoundException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'voirFicheMembre'");
     }
 
     // @Override

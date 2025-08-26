@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.church.echurch_backend.dtos.MembreDTO;
 import com.church.echurch_backend.entities.Membre;
+import com.church.echurch_backend.exceptions.MembreNotFoundException;
 import com.church.echurch_backend.services.MembreService;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 
@@ -30,6 +32,11 @@ public class MembreRestController {
     @GetMapping("/membres")
     public List<MembreDTO> getMembres() {
         return membreService.listerMembres();
+    }
+
+    @GetMapping("/membre/{id}")
+    public MembreDTO getMembre(@PathVariable(name = "id") Long membreId) throws MembreNotFoundException {
+        return membreService.voirFicheMembre(membreId);
     }
     
     @PostMapping("/membres")

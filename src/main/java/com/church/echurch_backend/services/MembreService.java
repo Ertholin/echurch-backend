@@ -12,5 +12,6 @@ public interface MembreService {
     void supprimerMembre(Long idMembre);
     List<MembreDTO> listerMembres();
     //List<Membre> rechercherMembre(String motCle);
-    public Membre voirFicheMembre(Long idMembre) throws MembreNotFoundException;
+    MembreDTO voirFicheMembre(Long idMembre) throws MembreNotFoundException;
+    
 }
