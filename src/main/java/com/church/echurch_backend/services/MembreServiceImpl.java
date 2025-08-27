@@ -25,25 +25,11 @@ public class MembreServiceImpl implements MembreService{
     private MembreMapperImpl dtoMapper;
 
     @Override
-    public Membre enregistrerMembre(Membre membre) {
+    public MembreDTO enregistrerMembre(MembreDTO membreDTO) {
         log.info("Saving a member");
-        
+        Membre membre = dtoMapper.fromMembreDTO(membreDTO);
         Membre membreEnregistre = membreRepository.save(membre);
-
-        // membreEnregistre.setId(UUID.randomUUID().toString());
-        // membreEnregistre.setDateIntegration(new Date());
-        // membreEnregistre.setAdresses(null);
-        // membreEnregistre.setGroupePosition(null);
-
-
-        return membreEnregistre;
-    }
-
-    @Override
-    public Membre modifierMembre(Membre membre) {
-        log.info("Updating a member");
-        Membre membreEnregistre = membreRepository.save(membre);
-        return membreEnregistre;
+        return dtoMapper.fromMembre(membreEnregistre);
     }
 
     @Override
@@ -53,10 +39,6 @@ public class MembreServiceImpl implements MembreService{
         return dtoMapper.fromMembre(membre);
     }
 
-    // @Override
-    // public void supprimerMembre(Long idMembre) {
-    //     membreRepository.deleteById(idMembre);
-    // }
 
     @Override
     public List<MembreDTO> listerMembres() {
@@ -64,20 +46,22 @@ public class MembreServiceImpl implements MembreService{
         List<MembreDTO> membreDTOs = membres.stream()
                 .map(membre -> dtoMapper.fromMembre(membre))
                 .collect(Collectors.toList());
-
         return membreDTOs;
     }
 
     @Override
-    public void supprimerMembre(Long idMembre) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'supprimerMembre'");
+    public MembreDTO modifierMembre(MembreDTO membreDTO) {
+        log.info("Updating a member");
+        Membre membre = dtoMapper.fromMembreDTO(membreDTO);
+        Membre membreEnregistre = membreRepository.save(membre);
+        return dtoMapper.fromMembre(membreEnregistre);
     }
 
-    // @Override
-    // public List<Membre> rechercherMembre(String motCle) {
-    //     List<Membre> membres = membreRepository.rechercherMembre(motCle);
-    //     return membres;
-    // }
+    @Override
+    public void supprimerMembre(Long idMembre) {
+        membreRepository.deleteById(idMembre);
+    }
+
+
     
 }
